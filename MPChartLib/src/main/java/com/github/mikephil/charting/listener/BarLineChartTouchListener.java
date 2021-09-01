@@ -213,6 +213,13 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
                             }
                         }
 
+                    } else {
+                        if (mChart.isHighlightPerDragEnabled()) {
+                            mLastGesture = ChartGesture.DRAG;
+
+                            if (mChart.isHighlightPerDragEnabled())
+                                performHighlightDrag(event);
+                        }
                     }
 
                 }
@@ -440,6 +447,8 @@ public class BarLineChartTouchListener extends ChartTouchListener<BarLineChartBa
      * @param e
      */
     private void performHighlightDrag(MotionEvent e) {
+
+        mChart.disableScroll();
 
         Highlight h = mChart.getHighlightByTouchPoint(e.getX(), e.getY());
 
